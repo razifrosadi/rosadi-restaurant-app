@@ -103,36 +103,36 @@
   text-decoration: none;
   font-weight: bold;
 }
-  .hero {
-    display: flex;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    min-height: 350px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+.hero {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  min-height: 350px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
 
-    background-image: url(../public/images/hero-image_4-large.jpg);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+  background-image: url("./images/heros/hero-image_4-large.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .hero_inner {
-    margin: 0 auto;
-    max-width: 800px;
+  margin: 0 auto;
+  max-width: 800px;
 }
 
 .hero_title {
-    color: #fff;
-    font-weight: 500;
-    font-size: 37px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 37px;
 }
 
 .hero_tagline {
-    color: #fff;
-    margin-top: 16px;
-    font-size: 18px;
-    font-weight: 300;
+  color: #fff;
+  margin-top: 16px;
+  font-size: 18px;
+  font-weight: 300;
 }
    
   /*
@@ -156,13 +156,38 @@
   .content .content__heading {
     font-weight: normal;
   }
+
+  /* favorite search */
+  input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #EEEEEE;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #EEEEEE;
+    padding: 12px 20px 12px 40px;
+    color: #222831;
+    margin: 20px 0px;
+  }
+  
+  input[type=text]{
+    width: 100%;
+  }
+  
+  .content__heading {
+    text-align: center;
+  }
+  
+  .search__heading{
+    text-align: center;
+  }
    
    
   /*
-    restos
+    restaurants
   */
    
-  .restos {
+  .restaurants {
     display: grid;
     grid-template-columns: 1fr;
     gap: 16px;
@@ -171,25 +196,35 @@
    
    
   /*
-    resto Item
+    restaurant Item
   */
    
-  .resto-item {
+  .restaurant-item {
     width: 100%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     overflow: hidden;
   }
    
-  .resto-item__header {
+  .restaurant-item__header {
     position: relative;
   }
    
-  .resto-item .resto-item__header .resto-item__header__poster {
+  .restaurant-item .restaurant-item__header .restaurant-item__header__poster {
     width: 100%;
+    height: auto;
   }
    
-  .resto-item .resto-item__header .resto-item__header__rating {
+  .restaurant-item .restaurant-item__header .restaurant-item__header__rating {
+    position: absolute;
+    padding: 8px;
+    bottom: 20px;
+    left: 0;
+    display: inline-block;
+    background-color: black;
+    color: white;
+  }
+  .restaurant-item .restaurant-item__header .restaurant-item__header__city {
     position: absolute;
     padding: 8px;
     bottom: 20px;
@@ -199,30 +234,31 @@
     color: white;
   }
    
-  .resto-item .resto-item__header .resto-item__header__rating .resto-item__header__rating__score {
+  .restaurant-item .restaurant-item__header .restaurant-item__header__rating .restaurant-item__header__rating__score {
     margin-left: 10px;
   }
    
-  .resto-item .resto-item__content {
+  .restaurant-item .restaurant-item__content {
     padding: 16px;
   }
    
-  .resto-item .resto-item__content h3 {
+  .restaurant-item .restaurant-item__content h3 {
     box-sizing: border-box;
     min-width: 44px;
     min-height: 44px;
     margin: 0 0 10px 0;
   }
    
-  .resto-item .resto-item__content h3 a {
+  .restaurant-item .restaurant-item__content h3 a {
     box-sizing: border-box;
     color: #db0000;
     text-decoration: none;
     min-width: 44px;
     min-height: 44px;
+    padding: 10px 0px;
   }
    
-  .resto-item .resto-item__content p {
+  .restaurant-item .restaurant-item__content p {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -232,10 +268,10 @@
    
    
   /*
-    resto
+    restaurant
   */
    
-  .resto {
+  .restaurant {
     margin: 0 auto;
     width: 100%;
     max-width: 800px;
@@ -244,12 +280,12 @@
     gap: 18px 16px;
   }
    
-  .resto .resto__poster {
+  .restaurant .restaurant__poster {
     width: 100%;
     max-width: 400px;
   }
    
-  .resto .resto__info h4 {
+  .restaurant .restaurant__info h4 {
     margin: 8px 0;
   }
    
@@ -295,4 +331,5 @@
     text-decoration: none;
     min-width: 44px;
     min-height: 44px;
+    padding: 12px 0;
   }

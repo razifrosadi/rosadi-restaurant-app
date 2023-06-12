@@ -1,22 +1,22 @@
 import CONFIG from '../../globals/config';
 
-const createRestoDetailTemplate = (resto) => `
-<h2 class="resto__title">${resto.restaurant.name}</h2>
-<img class="resto__poster" src="${CONFIG.BASE_IMAGE_URL}large/${resto.restaurant.pictureId}" crossorigin="anonymous" />
-<div class="resto__info">
+const createRestaurantDetailTemplate = (restaurant) => `
+<h2 class="restaurant__title">${restaurant.name}</h2>
+<img class="lazyload restaurant__poster" data-src="${CONFIG.BASE_IMAGE_URL}large/${restaurant.pictureId}" alt="${restaurant.name}" />
+<div class="restaurant__info">
   <h3>Information</h3>
   <h4>Rating</h4>
-  <p>${resto.restaurant.rating}</p>
+  <p>${restaurant.rating}</p>
   <h4>Description</h4>
-  <p>${resto.restaurant.description}</p>
+  <p>${restaurant.description}</p>
   <h4>Address</h4>
-  <p>${resto.restaurant.address}</p>
+  <p>${restaurant.address}</p>
   <h4>City</h4>
-  <p>${resto.restaurant.city}</p>
+  <p>${restaurant.city}</p>
 </div>
-<div class="resto__overview">
+<div class="restaurant__overview">
   <h3>Overview</h3>
-  <p>${resto.restaurant.categories.map((category) => category.name)}</p>
+  <p>${restaurant.categories.map((category) => category.name)}</p>
   <table>
   <thead>
       <tr>
@@ -26,22 +26,22 @@ const createRestoDetailTemplate = (resto) => `
   </thead>
   <tbody>
       <tr>
-          <td>${resto.restaurant.menus.foods.map((food) => food.name)}</td>
-          <td>${resto.restaurant.menus.drinks.map((drink) => drink.name)}</td>
+          <td>${restaurant.menus.foods.map((food) => food.name)}</td>
+          <td>${restaurant.menus.drinks.map((drink) => drink.name)}</td>
       </tr>
   </tbody>
   </table>
 </div>
 
-    <div class="resto__overview">
+    <div class="restaurant__overview">
         <class class="content__label" id="main-content">Reviewer</class>
         <div id="detailRestaurant"></div>
     </div>
 
-    <div class="resto__info">
-        ${resto.restaurant.customerReviews.map((customerReview) => `
+    <div class="restaurant__info">
+        ${restaurant.customerReviews.map((customerReview) => `
             <h4>Rating</h4>
-            <p>${resto.restaurant.rating}</p>
+            <p>${restaurant.rating}</p>
             <h2>${customerReview.name}</h2>
             <p>${customerReview.review}</p>
             <p>${customerReview.date}</p>
@@ -51,37 +51,40 @@ const createRestoDetailTemplate = (resto) => `
 
 `;
 
-const createRestoItemTemplate = (resto) => `
-<div class="resto-item">
-    <div class="resto-item__header">
-      <img class="resto-item__header__poster" alt="${resto.name}"
-           src="${CONFIG.BASE_IMAGE_URL}small/${resto.pictureId}">
-      <div class="resto-item__header__rating">
-        <p>⭐️<span class="resto-item__header__rating__score">${resto.rating}</span></p>
+const createRestaurantItemTemplate = (restaurant) => `
+<div class="restaurant-item">
+    <div class="restaurant-item__header">
+      <img class="lazyload restaurant-item__header__poster" alt="${restaurant.name || '-'}"
+           data-src="${CONFIG.BASE_IMAGE_URL}small/${restaurant.pictureId}" alt="${restaurant.name}">
+      <div class="restaurant-item__header__rating">
+        <p>⭐️<span class="restaurant-item__header__rating__score">${restaurant.rating || '-'}</span></p>
       </div>
+      <div class="restaurant-item__header__city">
+      <p><span class="restaurant-item__header__rating__score">${restaurant.city}</span></p>
     </div>
-    <div class="resto-item__content">
-      <h3><a href="/#/detail/${resto.id}">${resto.name}</a></h3>
-      <p>${resto.city}</p>
+    </div>
+    <div class="restaurant-item__content">
+      <h3 class="restaurant__title"><a href="${`/#/detail/${restaurant.id}`}">${restaurant.name || '-'}</a></h3>
+      <p>${restaurant.description || '-'}</p>
     </div>
   </div>
 `;
 
-const createLikeButtonTemplate = () => `
+const createLikeRestaurantButtonTemplate = () => `
   <button aria-label="like this restaurant" id="likeButton" class="like">
      <i class="fa fa-heart-o" aria-hidden="true"></i>
   </button>
 `;
 
-const createLikedButtonTemplate = () => `
+const createUnlikeRestaurantButtonTemplate = () => `
   <button aria-label="unlike this restaurant" id="likeButton" class="like">
     <i class="fa fa-heart" aria-hidden="true"></i>
   </button>
 `;
 
 export {
-  createRestoItemTemplate,
-  createRestoDetailTemplate,
-  createLikeButtonTemplate,
-  createLikedButtonTemplate,
+  createRestaurantItemTemplate,
+  createRestaurantDetailTemplate,
+  createLikeRestaurantButtonTemplate,
+  createUnlikeRestaurantButtonTemplate,
 };

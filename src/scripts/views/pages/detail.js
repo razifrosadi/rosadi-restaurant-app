@@ -1,33 +1,27 @@
 import UrlParser from '../../routes/url-parser';
 import TheRestaurantDbSource from '../../data/therestaurantdb-source';
-import { createRestoDetailTemplate } from '../templates/template-creator';
-import LikeButtonInitiator from '../../utils/like-button-initiator';
+import { createRestaurantDetailTemplate } from '../templates/template-creator';
 import FavoriteRestaurantIdb from '../../data/favorite-restaurant-idb';
+import LikeButtonPresenter from '../../utils/like-button-presenter';
 
 const Detail = {
   async render() {
     return `
-    <div id="resto" class="resto"></div>
+    <div id="restaurant" class="restaurant"></div>
     <div id="likeButtonContainer"></div>
       `;
   },
 
   async afterRender() {
     const url = UrlParser.parseActiveUrlWithoutCombiner();
-    const resto = await TheRestaurantDbSource.detailRestaurant(url.id);
-    const restoContainer = document.querySelector('#resto');
-    restoContainer.innerHTML = createRestoDetailTemplate(resto);
+    const { restaurant } = await TheRestaurantDbSource.detailRestaurant(url.id);
+    const restaurantContainer = document.querySelector('#restaurant');
+    restaurantContainer.innerHTML = createRestaurantDetailTemplate(restaurant);
 
-    LikeButtonInitiator.init({
+    LikeButtonPresenter.init({
       likeButtonContainer: document.querySelector('#likeButtonContainer'),
-      favoriterestaurants: FavoriteRestaurantIdb,
-      restaurant: {
-        id: resto.restaurant.id,
-        name: resto.restaurant.name,
-        rating: resto.restaurant.rating,
-        city: resto.restaurant.city,
-        pictureId: resto.restaurant.pictureId,
-      },
+      favoriteRestaurants: FavoriteRestaurantIdb,
+      restaurant,
     });
   },
 };

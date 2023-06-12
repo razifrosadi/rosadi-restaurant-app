@@ -3,7 +3,7 @@ import CONFIG from '../globals/config';
 const CacheHelper = {
   async cachingAppShell(requests) {
     const cache = await this._openCache();
-    cache.addAll(requests);
+    await cache.addAll(requests);
   },
 
   async deleteOldCache() {
@@ -14,33 +14,38 @@ const CacheHelper = {
   },
 
   async revalidateCache(request) {
-    const response = await caches.match(request);
+    let response = await caches.match(request);
 
-    if (response) {
-      this._fetchRequest(request);
-      return response;
+    if (!response) {
+      response = await this._fetchRequest(request);
     }
-    return this._fetchRequest(request);
+
+    return response;
   },
 
   async _openCache() {
-    return caches.open(CONFIG.CACHE_NAME);
+    return await caches.open(CONFIG.CACHE_NAME);
   },
 
   async _fetchRequest(request) {
-    const response = await fetch(request);
+    try {
+      const response = await fetch(request);
 
-    if (!response || response.status !== 200) {
+      if (!response || response.status !== 200) {
+        return response;
+      }
+
+      await this._addCache(request.clone());
       return response;
+    } catch (error) {
+      console.error('Error fetching request:', error);
+      throw error;
     }
-
-    await this._addCache(request);
-    return response;
   },
 
   async _addCache(request) {
     const cache = await this._openCache();
-    cache.add(request);
+    await cache.add(request);
   },
 };
 
