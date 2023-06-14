@@ -24,7 +24,7 @@ const CacheHelper = {
   },
 
   async _openCache() {
-    return await caches.open(CONFIG.CACHE_NAME);
+    return caches.open(CONFIG.CACHE_NAME);
   },
 
   async _fetchRequest(request) {
